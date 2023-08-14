@@ -1,0 +1,115 @@
+
+<!-- Каждый блок имеет область содержимого и ручку изменения размера в правом нижнем углу. Размер блоков можно изменить, щелкнув и перетащив маркер изменения размера левой кнопкой мыши. -->
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            height: 100%;
+            width: 100%;
+        }
+
+        .block {
+            height: 100%;
+            border: 1px solid black;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .block-content {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+        }
+
+        .block-resize {
+            position: absolute;
+            bottom: -5px;
+            right: -5px;
+            width: 10px;
+            height: 10px;
+            background-color: black;
+            cursor: nwse-resize;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="block">
+            <div class="block-content">
+                Блок 1
+            </div>
+            <div class="block-resize"></div>
+        </div>
+        <div class="block">
+            <div class="block-content">
+                Блок 2
+            </div>
+            <div class="block-resize"></div>
+        </div>
+        <div class="block">
+            <div class="block-content">
+                Блок 3
+            </div>
+            <div class="block-resize"></div>
+        </div>
+        <div class="block">
+            <div class="block-content">
+                Блок 4
+            </div>
+            <div class="block-resize"></div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            var container = $('.container');
+            var blocks = $('.block');
+            var resizeHandles = $('.block-resize');
+            var blockStartWidth = 0;
+            var blockStartHeight = 0;
+            var startX = 0;
+            var startY = 0;
+
+            resizeHandles.mousedown(function (e) {
+                var block = $(this).parent();
+                blockStartWidth = block.width();
+                blockStartHeight = block.height();
+                startX = e.clientX;
+                startY = e.clientY;
+                $(document).mousemove(function (e) {
+                    var deltaX = e.clientX - startX;
+                    var deltaY = e.clientY - startY;
+                    block.css({
+                        'width': (blockStartWidth + deltaX) + 'px',
+                        'height': (blockStartHeight + deltaY) + 'px'
+                    });
+                });
+            });
+
+            $(document).mouseup(function () {
+                $(document).off('mousemove');
+            });
+        });
+    </script>
+</body>
+
+</html>

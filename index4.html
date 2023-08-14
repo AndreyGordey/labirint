@@ -1,0 +1,111 @@
+<!-- выделение цветов на JS -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Фрукты</title>
+	<style>
+		body {
+			background-size: cover;
+			margin: 0;
+			padding: 0;
+            background: #333;
+		}
+
+		.fruit-list {
+			list-style: none;
+			padding: 0;
+		}
+
+		.fruit-list li {
+			padding: 10px;
+			margin-bottom: 5px;
+			color: #fff;
+			font-weight: bold;
+		}
+
+		.fruit-list .red {
+			background-color: #ff6666;
+		}
+
+		.fruit-list .green {
+			background-color: #66cc66;
+		}
+
+		.fruit-list .orange {
+			background-color: #ff9933;
+		}
+
+		.fruit-list .yellow {
+			background-color: #ffff66;
+		}
+
+		.color-buttons {
+			margin-bottom: 10px;
+		}
+
+		.color-buttons button {
+			display: inline-block;
+			padding: 5px;
+			margin-right: 10px;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.color-buttons button.red {
+			background-color: #ff6666;
+			color: #fff;
+		}
+
+		.color-buttons button.green {
+			background-color: #66cc66;
+			color: #fff;
+		}
+
+		.color-buttons button.orange {
+			background-color: #ff9933;
+			color: #fff;
+		}
+
+		.color-buttons button.yellow {
+			background-color: #ffff66;
+			color: #333;
+		}
+	</style>
+</head>
+<body>
+	<div class="color-buttons">
+		<button class="red">Red</button>
+		<button class="green">Green</button>
+		<button class="orange">Orange</button>
+		<button class="yellow">Yellow</button>
+	</div>
+	<ul class="fruit-list">
+		<li class="red">Apple</li>
+		<li class="green">Kiwi</li>
+		<li class="orange">Orange</li>
+		<li class="yellow">Banana</li>
+		<li class="red">Cherry</li>
+		<li class="green">Lime</li>
+		<li class="orange">Mango</li>
+		<li class="yellow">Pineapple</li>
+	</ul>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('.color-buttons button').click(function() {
+				var color = $(this).attr('class');
+				$('.fruit-list li').each(function() {
+					if ($(this).hasClass(color)) {
+						$(this).css('box-shadow', '0 0 10px ' + color);
+					} else {
+						$(this).css('box-shadow', 'none');
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>

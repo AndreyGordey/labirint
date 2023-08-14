@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<!-- обе домашки в одном проекте. -->
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			font-family: 'Pacifico', cursive;
+			font-size: 24px;
+			background: url('/InstaNovels_header.jpg') no-repeat center center fixed;
+			background-size: cover;
+			margin: 0;
+			padding: 0;
+		}
+
+		#menu {
+			position: fixed;
+			top: 0;
+			left: -200px;
+			width: 200px;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.8);
+			color: #2bfc02;
+			transition: all 0.3s ease-in-out;
+			z-index: 9999;
+			cursor: pointer;
+
+		}
+
+		#menu ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		#menu ul li {
+			padding: 10px;
+			border-bottom: 1px solid #00fd00;
+		}
+
+		#menu ul li:hover {
+			background-color: rgba(93, 255, 28, 0.2);
+		}
+
+		#menu-toggle {
+			position: fixed;
+			top: 20px;
+			left: 200px;
+			font-size: 30px;
+			cursor: pointer;
+			z-index: 99999;
+			color: #15ff00;
+		}
+
+		#menu-toggle:hover {
+			color: #00aeff;
+		}
+
+		#menu.active {
+			left: 0;
+		}
+
+		a {
+			text-decoration: none;
+			color: #15ff00;
+		}
+
+
+
+		.stars {
+			display: inline-block;
+			font-size: 34px;
+			color: #ccc;
+			cursor: pointer;
+		}
+
+		.stars:hover,
+		.stars:hover~.stars {
+			color: rgb(0, 255, 13);
+		}
+
+		.stars:hover:before,
+		.stars:hover~.stars:before {
+			content: '\2605';
+			position: absolute;
+			color: rgb(29, 247, 0);
+		}
+
+		.stars:before {
+			content: '\2606';
+			position: absolute;
+		}
+
+
+		.form {
+			position: fixed;
+			top: 0;
+			left: 1700px;
+			width: 200px;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.8);
+			color: #2bfc02;
+			/* transition: all 0.3s ease-in-out; */
+			z-index: 9999;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<div id="menu">
+			<ul>
+				<li><a href="index1.html" target="_blank">Первый лабиринт</a></li>
+				<li><a href="index2.html" target="_blank">Второй лабиринт</a></li>
+				<li><a href="index3.html" target="_blank">Третий лабиринт</a></li>
+				<li><a href="index4.html" target="_blank">Выбери фрукт по цвету</a></li>
+				<p>оцените игру:</p>
+				<div class="rating">
+					<span class="stars" data-rating="1">..</span>
+					<span class="stars" data-rating="2">..</span>
+					<span class="stars" data-rating="3">..</span>
+					<span class="stars" data-rating="4">..</span>
+					<span class="stars" data-rating="5">..</span>
+				</div>
+			</ul>
+		</div>
+		<div id="menu-toggle">&#9776; МЕНЮ</div>
+
+	</div>
+	<div class="form">
+		<label for="length">Длина:</label>
+		<input type="number" id="length" value="8">
+		<br>
+		<label for="numbers">Подключить числа:</label>
+		<input type="checkbox" id="numbers" checked>
+		<br>
+		<label for="upper">Подключить заглавные буквы:</label>
+		<input type="checkbox" id="upper" checked>
+		<br>
+		<label for="lower">Подключить строчные буквы:</label>
+		<input type="checkbox" id="lower" checked>
+		<br>
+		<button id="generate">Пуск</button>
+		<br>
+		<label for="output">Выпуск:</label>
+		<input type="text" id="output" readonly>
+	</div>
+
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$('#menu-toggle').click(function () {
+				$('#menu').toggleClass('active');
+			});
+		});
+	</script>
+
+
+
+	<script>
+		$(document).ready(function () {
+			$('.stars').click(function () {
+				var rating = $(this).data('rating');
+				$('.stars').each(function () {
+					var currentRating = $(this).data('rating');
+					if (currentRating <= rating) {
+						$(this).css('color', 'green');
+					} else {
+						$(this).css('color', '#ccc');
+					}
+				});
+			});
+		});
+	</script>
+
+
+	<script>
+		$(function () {
+			$('#generate').click(function () {
+				var length = parseInt($('#length').val());
+				var useNumbers = $('#numbers').is(':checked');
+				var useUpper = $('#upper').is(':checked');
+				var useLower = $('#lower').is(':checked');
+				var charset = '';
+				if (useNumbers) charset += '0123456789';
+				if (useUpper) charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+				if (useLower) charset += 'abcdefghijklmnopqrstuvwxyz';
+				var result = '';
+				for (var i = 0; i < length; i++) {
+					result += charset.charAt(Math.floor(Math.random() * charset.length));
+				}
+				$('#output').val(result);
+			});
+		});
+	</script>
+
+
+</body>
+
+</html>

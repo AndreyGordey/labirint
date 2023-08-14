@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>document</title>
+	<style>
+		body {
+			background: url('/511c8161681c74b2f21c461522797583.jpeg') no-repeat center center fixed;
+			background-size: cover;
+		}
+
+		img {
+			position: absolute;
+		}
+
+	</style>
+</head>
+
+<body>
+	<img src="seafood_animal_marine_fish_crab_icon_209473.png" alt="Foreground Image" id="foreground">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).mousemove(function (event) {
+			$('#foreground').css({ 'left': event.pageX, 'top': event.pageY });
+		});
+	</script>
+</body>
+
+</html>
